@@ -1,21 +1,25 @@
 package com.itsnotfound.pioneerwearcontroller.Handlers;
 
-import org.apache.commons.net.telnet.TelnetClient;
+import android.util.Log;
 
-import java.io.IOException;
+import com.itsnotfound.pioneerwearcontroller.library.SocketOps;
 
 /**
  * Created by mgardner on 10/30/14.
  */
 public class Power {
+    private static String TAG = Power.class.getSimpleName();
+
     public static void powerOn(String ipAddress) {
-        TelnetClient telnetClient = new TelnetClient();
-        try {
-            telnetClient.connect(ipAddress);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SocketOps ops = new SocketOps(ipAddress);
+        ops.sendCommand("PO");
+    }
 
+    public static boolean isPoweredOn(String ipAddress){
+        Log.d(TAG, "Checking power on.");
+        SocketOps ops = new SocketOps(ipAddress);
+        ops.sendCommand("?P");
 
+        return false;
     }
 }
