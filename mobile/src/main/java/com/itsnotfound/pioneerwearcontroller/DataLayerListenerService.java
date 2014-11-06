@@ -5,6 +5,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.WearableListenerService;
 import com.itsnotfound.pioneerwearcontroller.Handlers.Power;
 import com.itsnotfound.pioneerwearcontroller.Handlers.Volume;
@@ -39,9 +40,23 @@ public class DataLayerListenerService extends WearableListenerService {
         } else if (messageEvent.getPath().equals(ControlMessages.CONTROL_POWER_OFF)) {
 
         } else if (messageEvent.getPath().equals(ControlMessages.CONTROL_VOLUME_DOWN)) {
+            Log.d(TAG, "Running the volume down command.");
             Volume.volumeDown(ipAddress);
         } else if (messageEvent.getPath().equals(ControlMessages.CONTROL_VOLUME_UP)) {
+            Log.d(TAG, "Running the volume up command.");
             Volume.volumeUp(ipAddress);
+        } else{
+            Log.d(TAG, "Command not found: " + messageEvent.getPath());
         }
+    }
+
+    @Override
+    public void onPeerConnected(Node peer) {
+        Log.d(TAG, "Peer connected! " + peer.getDisplayName());
+    }
+
+    @Override
+    public void onPeerDisconnected(Node peer) {
+        Log.d(TAG, "Peer disconnected! " + peer.getDisplayName());
     }
 }
