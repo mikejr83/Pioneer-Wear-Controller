@@ -51,7 +51,7 @@ public class DataLayerListenerService extends WearableListenerService {
     }
 
     @Override
-    public void onPeerConnected(Node peer) {git branch
+    public void onPeerConnected(Node peer) {
 
         Log.d(TAG, "Peer connected! " + peer.getDisplayName());
     }
